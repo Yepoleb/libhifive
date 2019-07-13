@@ -21,8 +21,6 @@
 #define GPIO_IOF_SEL 0x3C
 #define GPIO_OUT_XOR 0x40
 
-extern const char* const GPIO_REG_NAMES[];
-
 enum GpioMode
 {
     GPIO_NONE, ///< Neither input nor output are enabled

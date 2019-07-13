@@ -6,6 +6,7 @@
 // PRCI Clocks
 
 // HFROSC - Internal high frequency ring oscillator - 72Mhz
+// Default clock
 
 uint32_t hfrosc_getdiv(void);
 void hfrosc_setdiv(uint32_t div);
@@ -25,8 +26,8 @@ bool hfxosc_getrdy(void);
 
 enum PllSource
 {
-    PLLSOURCE_HFROSC = 0,
-    PLLSOURCE_HFXOSC = 1
+    PLLSOURCE_HFROSC = 0, ///< Internal HF Oscillator
+    PLLSOURCE_HFXOSC = 1 ///< Eternal HF Oscillator
 };
 
 uint32_t pll_getr(void);
@@ -74,8 +75,8 @@ bool lfrosc_getrdy(void);
 
 enum LfclkSource
 {
-    LFCLK_LFROSC = 0,
-    LFCLK_EXT = 1
+    LFCLK_LFROSC = 0, ///< Internal LF Oscillator
+    LFCLK_EXT = 1 ///< External LF Oscillator
 };
 
 enum LfclkSource lfclk_getsel(void);

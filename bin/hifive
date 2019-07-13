@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "upload" ]]; then
+    echo -e "loadfile $2\nr\nexit" | JLinkExe -device FE310 -if JTAG -speed 4000 -jtagconf -1,-1 -autoconnect 1
+elif [[ $1 == "debug" ]]; then
+    JLinkGDBServer -device RISC-V -port 3333 &
+    riscv64-unknown-elf-gdb "$2" -ex "set remotetimeout 240" -ex "target extended-remote localhost:3333"
+    kill %1
+else
+    echo "Supported commands: upload <.hex>, debug <.elf>"
+fi

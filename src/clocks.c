@@ -90,13 +90,13 @@ static volatile uint32_t* const PRCI_PLLOUTDIV = (uint32_t*)(PRCI_BASE + 0x0C);
 
 uint32_t pll_getr(void)
 {
-    return *PRCI_PLLCFG & 3;
+    return (*PRCI_PLLCFG & 3) + 1;
 }
 
 void pll_setr(uint32_t r)
 {
     assert(r <= 4);
-    *PRCI_PLLCFG = (*PRCI_PLLCFG & ~3) | r;
+    *PRCI_PLLCFG = (*PRCI_PLLCFG & ~3) | (r - 1);
 }
 
 uint32_t pll_getf(void)
@@ -107,7 +107,7 @@ uint32_t pll_getf(void)
 
 void pll_setf(uint32_t f)
 {
-    assert(((f & 1) == 0) && (f <= 128));
+    //assert(((f & 1) == 0) && (f <= 128));
     uint32_t regvalue = (f - 1) >> 1;
     *PRCI_PLLCFG = (*PRCI_PLLCFG & ~(63 << 4)) | (regvalue << 4);
 }

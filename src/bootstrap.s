@@ -1,3 +1,7 @@
+/*
+Based on entry.S and crt0.S from freedom-metal
+*/
+
 .section .text.init
 .global _enter
 .type _enter, @function
@@ -133,5 +137,5 @@ argv:
 envp:
   .dc.a
 name:
-  .asciz "libgloss"
+  .asciz "libhifive"
 
