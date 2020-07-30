@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<device name="i2c">
+    <instance address="0x10016000">i2c0</instance>
+
+    <reg offset="0x00" name="prescaler_lo"/>
+    <reg offset="0x04" name="prescaler_hi"/>
+    <reg offset="0x08" name="control">
+        <field bits="6" attr="rw" type="bool">coreen</field>
+        <field bits="7" attr="rw" type="bool">inten</field>
+    </reg>
+    <reg offset="0x0C" name="data"/>
+    <reg offset="0x10" name="cmd">
+        <field bits="0" attr="w" type="bool">irqack</field>
+        <field bits="3" attr="w" type="bool">ack</field>
+        <field bits="4" attr="w" type="bool">write</field>
+        <field bits="5" attr="w" type="bool">read</field>
+        <field bits="6" attr="w" type="bool">stop</field>
+        <field bits="7" attr="w" type="bool">start</field>
+    </reg>
+    <reg offset="0x10" name="status">
+        <field bits="0" attr="r" type="bool">irqflag</field>
+        <field bits="1" attr="r" type="bool">transferinprogress</field>
+        <field bits="5" attr="r" type="bool">arblost</field>
+        <field bits="6" attr="r" type="bool">busy</field>
+        <field bits="7" attr="r" type="bool">receivedack</field>
+    </reg>
+</device>

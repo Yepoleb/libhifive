@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<device name="aon">
+    <instance address="0x10000000">aon0</instance>
+    
+    <reg offset="0x000" name="wdogcfg">
+        <field bits="3:0" attr="rw" type="int">wdogscale</field>
+        <field bits="8" attr="rw" type="bool">wdogrsten</field>
+        <field bits="9" attr="rw" type="bool">wdogzerocmp</field>
+        <field bits="12" attr="rw" type="bool">wdogenalways</field>
+        <field bits="13" attr="rw" type="bool">wdogcoreawake</field>
+        <field bits="28" attr="rw" type="bool">wdogip0</field>
+    </reg>
+    <reg offset="0x008" name="wdogcount"/>
+    <reg offset="0x010" name="wdogs"/>
+    <reg offset="0x018" name="wdogfeed"/>
+    <reg offset="0x01C" name="wdogkey"/>
+    <reg offset="0x020" name="wdogcmp0"/>
+    <reg offset="0x040" name="rtccfg">
+        <field bits="3:0" attr="rw" type="int">rtcscale</field>
+        <field bits="12" attr="rw" type="bool">rtcenalways</field>
+        <field bits="28" attr="rw" type="bool">rtcip0</field>
+    </reg>
+    <reg offset="0x048" name="rtccountlo"/>
+    <reg offset="0x04C" name="rtccounthi"/>
+    <reg offset="0x050" name="rtcs"/>
+    <reg offset="0x060" name="rtccmp0"/>
+    <reg offset="0x070" name="lfrosccfg">
+        <field bits="5:0" attr="rw" type="int">lfroscdiv</field>
+        <field bits="20:16" attr="rw" type="int">lfrosctrim</field>
+        <field bits="30" attr="rw" type="bool">lfroscen</field>
+        <field bits="31" attr="r" type="bool">lfroscrdy</field>
+    </reg>
+    <reg offset="0x07C" name="lfclkmux">
+        <field bits="0" attr="rw" type="int">lfextclk_sel</field>
+        <field bits="31" attr="r" type="int">lfextclk_mux_status</field>
+    </reg>
+    <reg offset="0x080" name="backup_0"/>
+    <reg offset="0x084" name="backup_1"/>
+    <reg offset="0x088" name="backup_2"/>
+    <reg offset="0x08C" name="backup_3"/>
+    <reg offset="0x090" name="backup_4"/>
+    <reg offset="0x094" name="backup_5"/>
+    <reg offset="0x098" name="backup_6"/>
+    <reg offset="0x09C" name="backup_7"/>
+    <reg offset="0x0A0" name="backup_8"/>
+    <reg offset="0x0A4" name="backup_9"/>
+    <reg offset="0x0A8" name="backup_10"/>
+    <reg offset="0x0AC" name="backup_11"/>
+    <reg offset="0x0B0" name="backup_12"/>
+    <reg offset="0x0B4" name="backup_13"/>
+    <reg offset="0x0B8" name="backup_14"/>
+    <reg offset="0x0BC" name="backup_15"/>
+    <reg offset="0x100" name="pmuwakeupi0"/>
+    <reg offset="0x104" name="pmuwakeupi1"/>
+    <reg offset="0x108" name="pmuwakeupi2"/>
+    <reg offset="0x10C" name="pmuwakeupi3"/>
+    <reg offset="0x110" name="pmuwakeupi4"/>
+    <reg offset="0x114" name="pmuwakeupi5"/>
+    <reg offset="0x118" name="pmuwakeupi6"/>
+    <reg offset="0x11C" name="pmuwakeupi7"/>
+    <reg offset="0x120" name="pmusleepi0"/>
+    <reg offset="0x124" name="pmusleepi1"/>
+    <reg offset="0x128" name="pmusleepi2"/>
+    <reg offset="0x12C" name="pmusleepi3"/>
+    <reg offset="0x130" name="pmusleepi4"/>
+    <reg offset="0x134" name="pmusleepi5"/>
+    <reg offset="0x138" name="pmusleepi6"/>
+    <reg offset="0x13C" name="pmusleepi7"/>
+    <reg offset="0x140" name="pmuie"/>
+    <reg offset="0x144" name="pmucause"/>
+    <reg offset="0x148" name="pmusleep"/>
+    <reg offset="0x14C" name="pmukey"/>
+    <reg offset="0x210" name="SiFiveBandgap"/>
+    <reg offset="0x300" name="AONCFG"/>
+</device>
+

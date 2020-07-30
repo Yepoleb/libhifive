@@ -3,9 +3,9 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "gpio.h"
-#include "pwm.h"
-#include "sleep.h"
+#include "hifive/gpio.h"
+#include "hifive/pwm.h"
+#include "hifive/util.h"
 
 /*
 gpio 22 red
@@ -14,8 +14,8 @@ gpio 21 blue
 */
 
 #define MAIN_CLOCK_RATE 16000000
-#define USEC_TO_SLEEP(usec) ((usec) * (MAIN_CLOCK_RATE / 1000000 / 2))
-#define MSEC_TO_SLEEP(msec) ((msec) * (MAIN_CLOCK_RATE / 1000 / 2))
+#define USEC_TO_DELAY(usec) ((usec) * (MAIN_CLOCK_RATE / 1000000 / 2))
+#define MSEC_TO_DELAY(msec) ((msec) * (MAIN_CLOCK_RATE / 1000 / 2))
 
 struct RGBColor
 {
@@ -60,21 +60,24 @@ struct RGBColor hsv_to_rgb(struct HSVColor hsv)
     return rgb;
 }
 
-int main()
+int main(void)
 {
-    gpio_set_mode(GPIO0, PIN(22) | PIN(19) | PIN(21), GPIO_IOF1);
-    //gpio_invert(GPIO0, PIN(22) | PIN(19) | PIN(21), 1);
+    gpio_set_mode(PIN(22) | PIN(19) | PIN(21), GPIO_IOF1);
 
-    pwm_setzerocmp(PWM1, true);
-    pwm_setcmp(PWM1, 0, 255);
-    pwm_setenalways(PWM1, true);
+    pwm_pwmcfg pwmcfg = {0};
+    pwmcfg.pwmzerocmp = true;
+    pwmcfg.pwmenalways = true;
+
+    pwm_pwmcmp0_set(pwm1, 255);
+    pwm_pwmcfg_set(pwm1, pwmcfg);
 
     for (uint8_t hue = 0; ; hue++) {
         struct HSVColor c1 = {hue / 255.f, 1.f, 0.5f};
         struct RGBColor c2 = gammacorrect(hsv_to_rgb(c1));
-        pwm_setcmp(PWM1, 3, (uint32_t)(c2.r * 255));
-        pwm_setcmp(PWM1, 1, (uint32_t)(c2.g * 255));
-        pwm_setcmp(PWM1, 2, (uint32_t)(c2.b * 255));
-        sleep(MSEC_TO_SLEEP(4));
+        pwm_pwmcmp3_set(pwm1, (uint32_t)(c2.r * 255));
+        pwm_pwmcmp1_set(pwm1, (uint32_t)(c2.g * 255));
+        pwm_pwmcmp2_set(pwm1, (uint32_t)(c2.b * 255));
+        delay(MSEC_TO_DELAY(4));
     }
+    return 0;
 }

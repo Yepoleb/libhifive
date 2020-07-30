@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<device name="spi">
+    <instance address="0x10014000">qspi0</instance>
+    <instance address="0x10024000">spi1</instance>
+    <instance address="0x10034000">spi2</instance>
+    
+    <enum name="spi_phase">
+        <edef val="0">SPI_INACTIVE_0</edef>
+        <edef val="1">SPI_INACTIVE_1</edef>
+    </enum>
+    
+    <enum name="spi_polarity">
+        <edef val="0">SPI_SAMPLE_LEADING</edef>
+        <edef val="1">SPI_SAMPLE_TRAILING</edef>
+    </enum>
+    
+    <enum name="spi_csmode">
+        <edef val="0">SPI_CSMODE_AUTO</edef>
+        <edef val="2">SPI_CSMODE_HOLD</edef>
+        <edef val="3">SPI_CSMODE_OFF</edef>
+    </enum>
+    
+    <enum name="spi_proto">
+        <edef val="0">SPI_PROTO_SINGLE</edef>
+        <edef val="1">SPI_PROTO_DUAL</edef>
+        <edef val="2">SPI_PROTO_QUAD</edef>
+    </enum>
+    
+    <enum name="spi_endian">
+        <edef val="0">SPI_MSB_FIRST</edef>
+        <edef val="1">SPI_LSB_FIRST</edef>
+    </enum>
+    
+    <enum name="spi_direction">
+        <edef val="0">SPI_DIR_RX</edef>
+        <edef val="1">SPI_DIR_TX</edef>
+    </enum>
+    
+    <reg offset="0x00" name="sckdiv">
+        <field bits="11:0" attr="rw" type="int">div</field>
+    </reg>
+    <reg offset="0x04" name="sckmode">
+        <field bits="0" attr="rw" type="spi_phase">pha</field>
+        <field bits="1" attr="rw" type="spi_polarity">pol</field>
+    </reg>
+    <reg offset="0x10" name="csid">
+        <field bits="31:0" attr="rw" type="uint32_t">csid</field>
+    </reg>
+    <reg offset="0x14" name="csdef">
+        <field bits="31:0" attr="rw" type="uint32_t">csdef</field>
+    </reg>
+    <reg offset="0x18" name="csmode">
+        <field bits="1:0" attr="rw" type="spi_csmode">mode</field>
+    </reg>
+    <reg offset="0x28" name="delay0">
+        <field bits="7:0" attr="rw" type="int">cssck</field>
+        <field bits="23:16" attr="rw" type="int">sckcs</field>
+    </reg>
+    <reg offset="0x2C" name="delay1">
+        <field bits="7:0" attr="rw" type="int">intercs</field>
+        <field bits="23:16" attr="rw" type="int">interxfr</field>
+    </reg>
+    <reg offset="0x40" name="fmt">
+        <field bits="1:0" attr="rw" type="spi_proto">proto</field>
+        <field bits="2" attr="rw" type="spi_endian">endian</field>
+        <field bits="3" attr="rw" type="spi_direction">dir</field>
+        <field bits="19:16" attr="rw" type="int">len</field>
+    </reg>
+    <reg offset="0x48" name="txdata">
+        <field bits="7:0" attr="rw" type="char">data</field>
+        <field bits="31" attr="ro" type="bool">full</field>
+    </reg>
+    <reg offset="0x4C" name="rxdata">
+        <field bits="7:0" attr="ro" type="char">data</field>
+        <field bits="31" attr="ro" type="bool">empty</field>
+    </reg>
+    <reg offset="0x50" name="txmark">
+        <field bits="2:0" attr="rw" type="int">txmark</field>
+    </reg>
+    <reg offset="0x54" name="rxmark">
+        <field bits="2:0" attr="rw" type="int">rxmark</field>
+    </reg>
+    <reg offset="0x60" name="fctrl">
+        <field bits="0" attr="rw" type="bool">en</field>
+    </reg>
+    <reg offset="0x64" name="ffmt">
+        <field bits="0" attr="rw" type="bool">cmd_en</field>
+        <field bits="3:1" attr="rw" type="int">addr_len</field>
+        <field bits="7:4" attr="rw" type="int">pad_cnt</field>
+        <field bits="9:8" attr="rw" type="spi_proto">cmd_proto</field>
+        <field bits="11:10" attr="rw" type="spi_proto">addr_proto</field>
+        <field bits="13:12" attr="rw" type="spi_proto">data_proto</field>
+        <field bits="23:16" attr="rw" type="char">cmd_code</field>
+        <field bits="31:24" attr="rw" type="char">pad_codey</field>
+    </reg>
+    <reg offset="0x70" name="ie">
+        <field bits="0" attr="rw" type="bool">txwm</field>
+        <field bits="1" attr="rw" type="bool">rxwm</field>
+    </reg>
+    <reg offset="0x74" name="ip">
+        <field bits="0" attr="ro" type="bool">txwm</field>
+        <field bits="1" attr="ro" type="bool">rxwm</field>
+    </reg>
+</device>

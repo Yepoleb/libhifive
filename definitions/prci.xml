@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<device name="prci">
+    <instance address="0x10008000">prci0</instance>
+
+    <reg offset="0x00" name="hfrosccfg">
+        <field bits="5:0" attr="rw" type="int">hfroscdiv</field>
+        <field bits="20:16" attr="rw" type="int">hfrosctrim</field>
+        <field bits="30" attr="rw" type="bool">hfroscen</field>
+        <field bits="31" attr="r" type="bool">hfroscrdy</field>
+    </reg>
+    <reg offset="0x04" name="hfxosccfg">
+        <field bits="30" attr="rw" type="bool">hfxoscen</field>
+        <field bits="31" attr="r" type="bool">hfxoscrdy</field>
+    </reg>
+    <reg offset="0x08" name="pllcfg">
+        <field bits="2:0" attr="rw" type="int">pllr</field>
+        <field bits="9:4" attr="rw" type="int">pllf</field>
+        <field bits="11:10" attr="rw" type="int">pllq</field>
+        <field bits="16" attr="rw" type="bool">pllsel</field>
+        <field bits="17" attr="rw" type="bool">pllrefsel</field>
+        <field bits="18" attr="rw" type="bool">pllbypass</field>
+        <field bits="31" attr="r" type="bool">plllock</field>
+    </reg>
+    <reg offset="0x0C" name="plloutdiv">
+        <field bits="5:0" attr="rw" type="int">plloutdiv</field>
+        <field bits="13:8" attr="rw" type="int">plloutdivby1</field>
+    </reg>
+    <reg offset="0xF0" name="procmoncfg"/>
+</device>

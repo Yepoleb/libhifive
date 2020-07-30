@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<device name="uart">
+    <instance address="0x10013000">uart0</instance>
+    <instance address="0x10023000">uart1</instance>
+
+    <reg offset="0x00" name="txdata">
+        <field bits="7:0" attr="rw" type="char">data</field>
+        <field bits="31" attr="r" type="bool">full</field>
+    </reg>
+    <reg offset="0x04" name="rxdata">
+        <field bits="7:0" attr="r" type="char">data</field>
+        <field bits="31" attr="r" type="bool">empty</field>
+    </reg>
+    <reg offset="0x08" name="txctrl">
+        <field bits="0" attr="rw" type="bool">txen</field>
+        <field bits="1" attr="rw" type="int">nstop</field>
+        <field bits="18:16" attr="rw" type="int">txcnt</field>
+    </reg>
+    <reg offset="0x0C" name="rxctrl">
+        <field bits="0" attr="rw" type="bool">rxen</field>
+        <field bits="18:16" attr="rw" type="int">rxcnt</field>
+    </reg>
+    <reg offset="0x10" name="ie">
+        <field bits="0" attr="rw" type="bool">txwm</field>
+        <field bits="1" attr="rw" type="bool">rxwm</field>
+    </reg>
+    <reg offset="0x14" name="ip">
+        <field bits="0" attr="r" type="bool">txwm</field>
+        <field bits="1" attr="r" type="bool">rxwm</field>
+    </reg>
+    <reg offset="0x18" name="div"/>
+</device>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<device name="gpio">
+    <instance address="0x10012000">gpio0</instance>
+
+    <reg offset="0x00" name="input_val"/>
+    <reg offset="0x04" name="input_en"/>
+    <reg offset="0x08" name="output_en"/>
+    <reg offset="0x0C" name="output_val"/>
+    <reg offset="0x10" name="pue"/>
+    <reg offset="0x14" name="ds"/>
+    <reg offset="0x18" name="rise_ie"/>
+    <reg offset="0x1C" name="rise_ip"/>
+    <reg offset="0x20" name="fall_ie"/>
+    <reg offset="0x24" name="fall_ip"/>
+    <reg offset="0x28" name="high_ie"/>
+    <reg offset="0x2C" name="high_ip"/>
+    <reg offset="0x30" name="low_ie"/>
+    <reg offset="0x34" name="low_ip"/>
+    <reg offset="0x38" name="iof_en"/>
+    <reg offset="0x3C" name="iof_sel"/>
+    <reg offset="0x40" name="out_xor"/>
+</device>

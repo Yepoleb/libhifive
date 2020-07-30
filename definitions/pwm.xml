@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<device name="pwm">
+    <instance address="0x10015000">pwm0</instance>
+    <instance address="0x10025000">pwm1</instance>
+    <instance address="0x10035000">pwm2</instance>
+
+    <reg offset="0x00" name="pwmcfg">
+        <field bits="3:0" attr="rw" type="int">pwmscale</field>
+        <field bits="8" attr="rw" type="bool">pwmsticky</field>
+        <field bits="9" attr="rw" type="bool">pwmzerocmp</field>
+        <field bits="10" attr="rw" type="bool">pwmdeglitch</field>
+        <field bits="12" attr="rw" type="bool">pwmenalways</field>
+        <field bits="13" attr="rw" type="bool">pwmenoneshot</field>
+        <field bits="16" attr="rw" type="bool">pwmcmp0center</field>
+        <field bits="17" attr="rw" type="bool">pwmcmp1center</field>
+        <field bits="18" attr="rw" type="bool">pwmcmp2center</field>
+        <field bits="19" attr="rw" type="bool">pwmcmp3center</field>
+        <field bits="24" attr="rw" type="bool">pwmcmp0gang</field>
+        <field bits="25" attr="rw" type="bool">pwmcmp1gang</field>
+        <field bits="26" attr="rw" type="bool">pwmcmp2gang</field>
+        <field bits="27" attr="rw" type="bool">pwmcmp3gang</field>
+        <field bits="28" attr="rw" type="bool">pwmcmp0ip</field>
+        <field bits="29" attr="rw" type="bool">pwmcmp1ip</field>
+        <field bits="30" attr="rw" type="bool">pwmcmp2ip</field>
+        <field bits="31" attr="rw" type="bool">pwmcmp3ip</field>
+    </reg>
+    <reg offset="0x08" name="pwmcount"/>
+    <reg offset="0x10" name="pwms"/>
+    <reg offset="0x20" name="pwmcmp0"/>
+    <reg offset="0x24" name="pwmcmp1"/>
+    <reg offset="0x28" name="pwmcmp2"/>
+    <reg offset="0x2C" name="pwmcmp3"/>
+</device>

@@ -6,13 +6,13 @@
 #include <sys/time.h>
 #include <sys/times.h>
 
-#include "uart.h"
+#include "hifive/uart.h"
 
 #define SYS_STUB errno = ENOSYS; return -1;
 
 void _system_init(void)
 {
-    uart_init(UART0, UART_8N1, 139);
+    uart_init(uart0, UART_8N1, 139);
 }
 
 ssize_t _write(int file, const void* ptr, size_t len)
@@ -22,7 +22,7 @@ ssize_t _write(int file, const void* ptr, size_t len)
         return -1;
     }
 
-    uart_write_blocking(UART0, ptr, len);
+    uart_write_blocking(uart0, ptr, len);
     return 0;
 }
 
