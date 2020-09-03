@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<device name="csr">
+    <enum name="trap_mode">
+        <edef val="0">TRAP_MODE_DIRECT</edef>
+        <edef val="1">TRAP_MODE_VECTORED</edef>
+    </enum>
+
+    <enum name="exception_code">
+        <edef val="0">EXCEPT_U_SOFTWARE</edef>
+        <edef val="1">EXCEPT_S_SOFTWARE</edef>
+        <edef val="3">EXCEPT_M_SOFTWARE</edef>
+        <edef val="4">EXCEPT_U_TIMER</edef>
+        <edef val="5">EXCEPT_S_TIMER</edef>
+        <edef val="7">EXCEPT_M_TIMER</edef>
+        <edef val="8">EXCEPT_U_EXTERNAL</edef>
+        <edef val="9">EXCEPT_S_EXTERNAL</edef>
+        <edef val="11">EXCEPT_M_EXTERNAL</edef>
+        <edef val="0">EXCEPT_INST_ALIGN</edef>
+        <edef val="1">EXCEPT_INST_ACCESS</edef>
+        <edef val="2">EXCEPT_INST_ILLEGAL</edef>
+        <edef val="3">EXCEPT_BREAKPOINT</edef>
+        <edef val="4">EXCEPT_LOAD_ALIGN</edef>
+        <edef val="5">EXCEPT_LOAD_ACCESS</edef>
+        <edef val="6">EXCEPT_STORE_ALIGN</edef>
+        <edef val="7">EXCEPT_STORE_ACCESS</edef>
+        <edef val="8">EXCEPT_U_ENVIRON</edef>
+        <edef val="9">EXCEPT_S_ENVIRON</edef>
+        <edef val="10">EXCEPT_M_ENVIRON</edef>
+        <edef val="12">EXCEPT_INST_PAGEFAULT</edef>
+        <edef val="13">EXCEPT_LOAD_PAGEFAULT</edef>
+        <edef val="15">EXCEPT_STORE_PAGEFAULT</edef>
+    </enum>
+
+    <csr name="mstatus">
+        <field bits="0" attr="rw" type="bool">uie</field>
+        <field bits="1" attr="rw" type="bool">sie</field>
+        <field bits="2" attr="rw" type="bool">reserved1</field>
+        <field bits="3" attr="rw" type="bool">mie</field>
+        <field bits="4" attr="rw" type="bool">upie</field>
+        <field bits="5" attr="rw" type="bool">spie</field>
+        <field bits="6" attr="rw" type="bool">reserved2</field>
+        <field bits="7" attr="rw" type="bool">mpie</field>
+        <field bits="8" attr="rw" type="bool">spp</field>
+        <field bits="10:9" attr="rw" type="int">reserved3</field>
+        <field bits="12:11" attr="rw" type="int">mpp</field>
+        <field bits="14:13" attr="rw" type="int">fs</field>
+        <field bits="16:15" attr="rw" type="int">xs</field>
+        <field bits="17" attr="rw" type="bool">mprv</field>
+        <field bits="18" attr="rw" type="bool">sum</field>
+        <field bits="19" attr="rw" type="bool">mxr</field>
+        <field bits="20" attr="rw" type="bool">tvm</field>
+        <field bits="21" attr="rw" type="bool">tw</field>
+        <field bits="22" attr="rw" type="bool">tsr</field>
+        <field bits="30:23" attr="rw" type="int">reserved4</field>
+        <field bits="31" attr="r" type="bool">sd</field>
+    </csr>
+
+<!-- needs special handling
+    <csr name="mtvec">
+        <field bits="1:0" attr="rw" type="trap_mode">mode</field>
+        <field bits="31:2" attr="rw" type="void*">base</field>
+    </csr>
+-->
+
+    <csr name="mip">
+        <field bits="0" attr="rw" type="bool">usip</field>
+        <field bits="1" attr="rw" type="bool">ssip</field>
+        <field bits="2" attr="rw" type="bool">reserved1</field>
+        <field bits="3" attr="rw" type="bool">msip</field>
+        <field bits="4" attr="rw" type="bool">utip</field>
+        <field bits="5" attr="rw" type="bool">stip</field>
+        <field bits="6" attr="rw" type="bool">reserved2</field>
+        <field bits="7" attr="rw" type="bool">mtip</field>
+        <field bits="8" attr="rw" type="bool">ueip</field>
+        <field bits="9" attr="rw" type="bool">seip</field>
+        <field bits="10" attr="rw" type="bool">reserved3</field>
+        <field bits="11" attr="rw" type="bool">meip</field>
+        <field bits="31:12" attr="rw" type="int">reserved4</field>
+    </csr>
+
+    <csr name="mie">
+        <field bits="0" attr="rw" type="bool">usie</field>
+        <field bits="1" attr="rw" type="bool">ssie</field>
+        <field bits="2" attr="rw" type="bool">reserved1</field>
+        <field bits="3" attr="rw" type="bool">msie</field>
+        <field bits="4" attr="rw" type="bool">utie</field>
+        <field bits="5" attr="rw" type="bool">stie</field>
+        <field bits="6" attr="rw" type="bool">reserved2</field>
+        <field bits="7" attr="rw" type="bool">mtie</field>
+        <field bits="8" attr="rw" type="bool">ueie</field>
+        <field bits="9" attr="rw" type="bool">seie</field>
+        <field bits="10" attr="rw" type="bool">reserved3</field>
+        <field bits="11" attr="rw" type="bool">meie</field>
+        <field bits="31:12" attr="rw" type="int">reserved4</field>
+    </csr>
+
+    <csr name="mcause">
+        <field bits="30:0" attr="rw" type="exception_code">exception_code</field>
+        <field bits="31" attr="rw" type="bool">interrupt</field>
+    </csr>
+</device>

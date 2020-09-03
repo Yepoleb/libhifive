@@ -2,6 +2,11 @@
 <device name="prci">
     <instance address="0x10008000">prci0</instance>
 
+    <enum name="pll_ref">
+        <edef val="0">PLL_REF_HFROSC</edef>
+        <edef val="1">PLL_REF_HFXOSC</edef>
+    </enum>
+
     <reg offset="0x00" name="hfrosccfg">
         <field bits="5:0" attr="rw" type="int">hfroscdiv</field>
         <field bits="20:16" attr="rw" type="int">hfrosctrim</field>
@@ -17,7 +22,7 @@
         <field bits="9:4" attr="rw" type="int">pllf</field>
         <field bits="11:10" attr="rw" type="int">pllq</field>
         <field bits="16" attr="rw" type="bool">pllsel</field>
-        <field bits="17" attr="rw" type="bool">pllrefsel</field>
+        <field bits="17" attr="rw" type="pll_ref">pllrefsel</field>
         <field bits="18" attr="rw" type="bool">pllbypass</field>
         <field bits="31" attr="r" type="bool">plllock</field>
     </reg>

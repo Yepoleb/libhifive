@@ -44,7 +44,7 @@ static inline bool uart_read(uart dev, uint8_t* b)
 
 static inline void uart_write_blocking(uart dev, const void* data, size_t size)
 {
-    const unsigned char* data_char = data;
+    const unsigned char* data_char = (const unsigned char*)data;
     for (size_t i = 0; i < size; i++) {
         while (!uart_write(dev, data_char[i])) {}
     }
@@ -60,7 +60,7 @@ static inline void uart_print_blocking(uart dev, const char* str)
 
 static inline void uart_read_blocking(uart dev, void* data, size_t size)
 {
-    unsigned char* data_char = data;
+    unsigned char* data_char = (unsigned char*)data;
     for (size_t i = 0; i < size; i++) {
         while (!uart_read(dev, &data_char[i])) {}
     }

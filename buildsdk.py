@@ -24,6 +24,8 @@ def parse_field(fielddecl):
         start = int(bits)
         end = start + 1
     fieldtype = fielddecl.attrib["type"]
+    if fieldtype == "bool":
+        assert end - start == 1
     return {
         "name": fielddecl.text,
         "start": start,
@@ -69,12 +71,22 @@ def parse_reg(regdecl):
         "attr": attr
     }
 
+def parse_csr(csrdecl):
+    fields = [parse_field(fielddecl) for fielddecl in csrdecl]
+    attr = "".join(set("".join(field["attr"] for field in fields)))
+    return {
+        "name": csrdecl.attrib["name"],
+        "fields": fields,
+        "attr": attr
+    }
+
 def parse_device(root):
     device = {
         "devicename": root.attrib["name"],
         "instances": [],
         "enums": [],
-        "registers": []
+        "registers": [],
+        "csrs": []
     }
 
     for rootdecl in root:
@@ -84,6 +96,8 @@ def parse_device(root):
             device["enums"].append(parse_enum(rootdecl))
         elif rootdecl.tag == "reg":
             device["registers"].append(parse_reg(rootdecl))
+        elif rootdecl.tag == "csr":
+            device["csrs"].append(parse_csr(rootdecl))
 
     return device
 
@@ -92,6 +106,7 @@ jenv = jinja2.Environment(
     autoescape=False, trim_blocks=True, lstrip_blocks=True,
     keep_trailing_newline=False)
 template = jenv.get_template("template.h")
+template_csr = jenv.get_template("template_csr.h")
 
 definitions_path = pathlib.Path("definitions/")
 generated_path = pathlib.Path("generated/")
@@ -118,7 +133,8 @@ for deffile_path in definitions_path.glob("*.xml"):
     root = tree.getroot()
     device = parse_device(root)
     print("Device", device["devicename"], "contains",
-          len(device["registers"]), "registers")
+          len(device["registers"]) + len(device["csrs"]),
+          "registers")
     header_name = device["devicename"] + ".h"
     extrafile_path = deviceextra_path / header_name
     genfile_path = gen_header_path / header_name
@@ -129,5 +145,8 @@ for deffile_path in definitions_path.glob("*.xml"):
             extra_content = extrafile.read()
 
     with open(genfile_path, "w") as genfile:
-        genfile.write(template.render(device))
+        if device["devicename"] == "csr":
+            genfile.write(template_csr.render(device))
+        else:
+            genfile.write(template.render(device))
         genfile.write(extra_content)

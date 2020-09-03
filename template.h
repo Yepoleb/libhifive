@@ -28,8 +28,8 @@ typedef enum {{ en.name }}
     {{ enval.name }} = {{ enval.value }},
     {% endfor %}
 } {{ en.name }};
-{% endfor %}
 
+{% endfor %}
 {% for reg in registers %}
 {% set fullname = devicename + "_" + reg.name %}
 /*
