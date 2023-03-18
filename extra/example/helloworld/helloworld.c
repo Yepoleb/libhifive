@@ -22,6 +22,8 @@ int main(void)
     pwm_pwmcmp1_set(pwm1, 255);
     pwm_pwmcmp2_set(pwm1, 255);
 
+    // Initialize with baudrate 115200
+    // 16Mhz (tlclk) / 139 = 115107Hz
     uart_init(uart0, UART_8N1, 139);
     printf("Hello world!\r\n");
     return 0;
